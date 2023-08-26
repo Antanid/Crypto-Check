@@ -1,0 +1,184 @@
+.convert_block {
+  height: 200px;
+  padding: 50px 0;
+  align-items: center;
+  position: relative;
+
+  .convert_text {
+    z-index: 99999;
+    text-align: center;
+    position: relative;
+    h3 {
+      font-size: 30px;
+      background: linear-gradient(to left, #FFFFFF 0%, #BAA1CF 65%);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+    }
+  }
+
+  .convert_input {
+    z-index: 9999;
+   position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+
+    .convert_swap {
+      button {
+        cursor: pointer;
+        border: none;
+        outline: none;
+        background: transparent;
+
+        img {
+          transform: rotate(90deg);
+          width: 32px;
+
+        }
+
+        &:hover {
+          img {
+            transform: rotate(450deg);
+            transition: transform 0.5s;
+          }
+
+        }
+      }
+    }
+    .convert_howMuch {
+      input {
+        width: 50px;
+        padding: 5px;
+        border-radius: 10px;
+        outline: none;
+      }
+    }
+    .convert_buttonSearch {
+      font-size: 15px;
+      width: 100px;
+      position: relative;
+      color: #000;
+      cursor: pointer;
+      margin: 0 10px;
+      border-radius: 6px;
+      padding: 12px;
+      border: none;
+      background-color: #fff;
+  
+  
+      &:before {
+        content: "";
+        background: linear-gradient(45deg,
+            #ff0000,
+            #ff7300,
+            #fffb00,
+            #48ff00,
+            #00ffd5,
+            #002bff,
+            #7a00ff,
+            #ff00c8,
+            #ff0000);
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        animation: glowing 20s linear infinite;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        border-radius: 10px;
+  
+        &:active {
+          color: #000;
+  
+          &::after {
+            background: transparent;
+          }
+        }
+      }
+  
+      &:hover {
+        color: #ffff;
+        background-color: #000;
+        transition: background-color 0.3s ease-in-out;
+  
+        &::before {
+          opacity: 1;
+        }
+      }
+  
+      &:after {
+        z-index: -1;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #111;
+        left: 0;
+        top: 0;
+        border-radius: 10px;
+      }
+  
+      @keyframes glowing {
+        0% {
+          background-position: 0 0;
+        }
+  
+        50% {
+          background-position: 400% 0;
+        }
+  
+        100% {
+          background-position: 0 0;
+        }
+  
+      }
+  
+  
+      @keyframes rotation {
+        from {
+          transform: rotate(0deg);
+        }
+  
+        to {
+          transform: rotate(359deg);
+        }
+      }
+    }
+  
+  }
+  .convert_result {
+    text-align: center;
+  }
+
+  input {
+    margin: 0 10px;
+    width: 200px;
+    padding: 5px;
+    border-radius: 10px;
+    outline: none;
+  }
+
+
+  .convert_bg_coin1 {
+    z-index: 1;
+   .convert_first{
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    object-fit: contain;
+   }
+   .convert_second{
+    position: absolute;
+    bottom: 74%;
+    right: 12%;
+    object-fit: contain;
+   }
+  }
+
+
+}

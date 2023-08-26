@@ -1,0 +1,28 @@
+.header_block {
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    background-color: rgba(0, 0, 0, 0.405);
+    position: fixed;
+    width: 100%;
+
+    .logo_block {
+        img {
+            cursor: pointer;
+            width: 70px;
+        }
+    }
+
+    .ul_menu {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+
+        li {
+            cursor: pointer;
+            padding: 0 10px;
+            list-style-type: none;
+        }
+    }
+}

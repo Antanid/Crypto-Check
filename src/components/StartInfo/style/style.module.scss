@@ -1,0 +1,38 @@
+.info_block {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+ 
+
+.info_text{
+    width: 50%;
+    text-align: center;
+    h1{
+        font-size: 40px;
+        span{
+            color: rgba(255, 255, 255, 0.488);
+        }
+    }
+}
+    .info_img {
+        animation: updown 2s linear infinite;
+        img {
+            height: 400px;
+        }
+
+    }
+}
+@keyframes updown {
+    0% {
+        transform: translateY(-20px);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
