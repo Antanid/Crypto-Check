@@ -45,7 +45,7 @@ const StartInfo = () => {
   };
 
   return (
-    <div className={style.info_block}>
+    <div id="StartInfo" className={style.info_block}>
       <div className={style.info_text}>
         <h1>
           You can always check <br/>

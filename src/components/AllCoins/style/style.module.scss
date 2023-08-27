@@ -1,0 +1,82 @@
+.all_coins{
+    max-width: 1140px;
+    margin: auto;
+    .all_coins_h2{
+        display: flex;
+        justify-content: center;
+        h2{
+            font-size: 30px;
+        }
+    }
+.coins_heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 12px #18191b;
+    border-radius: 8px;
+    margin: 2rem 1rem;
+    padding: .7rem 1rem;
+    font-weight: 700;
+}
+.coins_error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 40px 0;
+}
+.coin_row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 12px #18191b;
+    border-radius: 8px;
+    margin: 2rem 1rem;
+    padding: .7rem 1rem;
+    &:hover{
+        transform: scale(1.04);
+        transition: .3s ease-in-out;
+        cursor: pointer;
+    }
+    .img_symbol{
+        display: flex;
+        align-items: center;
+        img{
+            height: 40px;
+            margin-right: 8px;
+            width: auto;
+        }
+    }
+    
+}
+.coins_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    button{
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+        cursor: pointer;
+        margin: 0 10px;
+        border-radius: 6px;
+        padding: 12px;
+        
+        font-size: 15px;
+        width: 100px;
+        &:hover{
+            transition: all 0.2s ease-in;
+            background-color: transparent;
+            border: 1px solid #fff;
+            
+        }
+    }
+    .button_disable{
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+}
+}

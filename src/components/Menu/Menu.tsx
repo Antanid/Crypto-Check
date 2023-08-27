@@ -6,10 +6,25 @@ import style from './style/style.module.scss'
 const Menu = () => {
   const [menuLi] = useState([
     {
-      name: "CryproInfo",
+      name: "Main",
+      path: '#StartInfo'
+     
+    },
+    {
+      name: "Convert Crypto",
+      path: '#ConvertCrypto'
+    },
+    {
+      name: "Cryptocurrencies",
+      path: '#All_coins'
+    },
+    {
+      name: "Info",
+      path: '#InfoBlock'
     },
     {
       name: "Contact",
+      path: '#Contact'
     },
   ]);
 
@@ -20,7 +35,9 @@ const Menu = () => {
         </div>
         <ul className={style.ul_menu}>
           {menuLi.map((i) => (
+            <a href={i.path}>
             <li>{i.name}</li>
+            </a>
           ))}
         </ul>
       </header>

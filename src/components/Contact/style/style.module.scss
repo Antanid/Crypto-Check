@@ -1,0 +1,169 @@
+.contact_main {
+
+    margin-bottom: 100px;
+
+    .contact_main_h2 {
+        margin-top: 100px;
+        margin-bottom: 50px;
+
+        h2 {
+            font-size: 30px;
+            text-align: center;
+        }
+    }
+
+    .contact_mainInfo {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .contact_blockInput {
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0px 0px 12px #18191b;
+            padding: 10px;
+            border-radius: 10px;
+            width: 400px;
+            height: 300px;
+            align-items: center;
+
+            input {
+                height: 25px;
+                border-radius: 10px;
+                padding: 5px;
+                width: 90%;
+                margin-bottom: 10px;
+                outline: none;
+            }
+
+            textarea {
+                outline: none;
+                border-radius: 10px;
+                padding: 5px;
+                width: 90%;
+                height: 200px;
+                resize: none;
+            }
+        }
+
+        .contact_blockImg {
+            animation: updown 2s linear infinite;
+            img {
+                width: 200px;
+            }
+        }
+
+        button {
+            margin-top: 10px;
+            font-size: 15px;
+            width: 100px;
+            position: relative;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 6px;
+            padding: 12px;
+            border: none;
+            background-color: #402756;
+            width: 90%;
+            border: 1px solid #fff;
+
+            &:before {
+                content: "";
+                background: linear-gradient(45deg,
+                        #ff0000,
+                        #ff7300,
+                        #fffb00,
+                        #48ff00,
+                        #00ffd5,
+                        #002bff,
+                        #7a00ff,
+                        #ff00c8,
+                        #ff0000);
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                background-size: 400%;
+                z-index: -1;
+                filter: blur(5px);
+                width: calc(100% + 4px);
+                height: calc(100% + 4px);
+                animation: glowing 20s linear infinite;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+                border-radius: 10px;
+
+                &:active {
+                    color: #000;
+                    
+                    &::after {
+                        background: transparent;
+                    }
+                }
+            }
+
+            &:hover {
+                border: 1px solid transparent;
+                color: #ffff;
+                background-color: #000;
+                transition: background-color 0.3s ease-in-out;
+
+                &::before {
+                    opacity: 1;
+                }
+            }
+
+            &:after {
+                z-index: -1;
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: #111;
+                left: 0;
+                top: 0;
+                border-radius: 10px;
+            }
+
+            @keyframes glowing {
+                0% {
+                    background-position: 0 0;
+                }
+
+                50% {
+                    background-position: 400% 0;
+                }
+
+                100% {
+                    background-position: 0 0;
+                }
+
+            }
+
+
+            @keyframes rotation {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(359deg);
+                }
+            }
+
+        }
+    }
+}
+
+@keyframes updown {
+    0% {
+        transform: translateY(-20px);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}

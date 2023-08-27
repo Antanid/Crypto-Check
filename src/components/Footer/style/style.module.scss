@@ -1,0 +1,18 @@
+.footer_block{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: black;
+    .footer_link{
+        img{
+            width: 40px;
+            &:hover{
+                transform: rotate(360deg);
+                transition: transform 1s ;
+            }
+        }
+    }
+}

@@ -23,8 +23,53 @@ const CoinCovert = () => {
   const [firstCoin, setFirstCoin] = useState<string>(`BTC`);
   const [secendCoin, setSecendCoin] = useState<string>(`USDT`);
   const [howMuch, setHowMuch] = useState<number>(1);
+
   const [convert, setConvert] = useState(false);
   const [swapConvert, setSwapConvert] = useState(false);
+
+  const [openCrypto, setOpenCrypto] = useState(false);
+  const [cryptoList] = useState([
+    {
+      name: "BTC",
+    },
+    {
+      name: "ETH",
+    },
+    {
+      name: "BNB",
+    },
+    {
+      name: "BUSD",
+    },
+    {
+      name: "ADA",
+    },
+    {
+      name: "SOL",
+    },
+  ]);
+
+  const [openFiat, setOpenFiat] = useState(false);
+  const [fiatList] = useState([
+    {
+      name: "USDT",
+    },
+    {
+      name: "USD",
+    },
+    {
+      name: "KRW",
+    },
+    {
+      name: "JPY",
+    },
+    {
+      name: "EUR",
+    },
+    {
+      name: "GBP",
+    },
+  ]);
 
   const valueNum: any = useSelector(setConvertValue);
   const coin1 = useSelector(setCoin1);
@@ -41,29 +86,70 @@ const CoinCovert = () => {
     if (+num > 0 || num === "") setHowMuch(num);
   };
 
+  const handleSubmit = (event: any) => {
+
+    if (event.key === 'Enter') {
+      console.log('HELLO')
+    }
+    // or you can send to backend
+  };
   const onClickConvert = () => {
     setConvert((prev) => !prev);
     dispatch(addCoin1(firstCoin));
     dispatch(addCoin2(secendCoin));
+    setOpenFiat(false);
+    setOpenCrypto(false)
   };
 
   const onSwapCoin = () => {
     setSwapConvert((prev) => !prev);
   };
 
+  const onOpenCryptoList = () => {
+    setOpenCrypto((prev) => !prev);
+  };
+
+  const onOpenFiatList = () => {
+    setOpenFiat((prev) => !prev);
+  };
+
+  const onSelectCrypto = (str: string) => {
+    setFirstCoin(str);
+    setOpenCrypto(false);
+  };
+
+  const onSelectFiat = (str: string) => {
+    setSecendCoin(str);
+    setOpenFiat(false);
+  };
+
   return (
-    <div className={style.convert_block}>
+    <div id="ConvertCrypto" className={style.convert_block}>
       <div className={style.convert_text}>
         <h3>Cryptocurrency Converter Calculator</h3>
       </div>
 
       <div className={style.convert_input}>
-        <div>
+        <div className={style.convert_value}>
           <input
+            onClick={onOpenCryptoList}
             type="text"
             value={firstCoin}
             onChange={(e) => setFirstCoin(e.target.value.toUpperCase())}
           />
+          {openCrypto && (
+            <ul className={style.conver_crypto_popUp}>
+              {cryptoList.map((i) => (
+                <li
+                  key={i.name}
+                  className={firstCoin === i.name ? style.selected_li : ""}
+                  onClick={() => onSelectCrypto(i.name)}
+                >
+                  {i.name}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div className={style.convert_swap}>
@@ -72,20 +158,41 @@ const CoinCovert = () => {
           </button>
         </div>
 
-        <div>
+        <div className={style.convert_value}>
           <input
+            onClick={onOpenFiatList}
             type="text"
             value={secendCoin}
             onChange={(e) => setSecendCoin(e.target.value.toUpperCase())}
           />
+          {openFiat && (
+            <ul className={style.conver_crypto_popUp}>
+              {fiatList.map((i) => (
+                <li
+                  key={i.name}
+                  className={secendCoin === i.name ? style.selected_li : ""}
+                  onClick={() => onSelectFiat(i.name)}
+                >
+                  {i.name}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div className={style.convert_howMuch}>
           <input type="number" value={howMuch} onChange={(e) => onChangeHowMuch(e)} />
         </div>
-        <button className={style.convert_buttonSearch} onClick={onClickConvert}>
-          Convert
-        </button>
+        <div     
+         tabIndex={0}
+           onKeyDown={handleSubmit}>
+          <button  
+          className={style.convert_buttonSearch} 
+          onClick={onClickConvert}
+          >
+            Convert
+          </button>
+        </div>
       </div>
 
       <div className={style.convert_result}>
