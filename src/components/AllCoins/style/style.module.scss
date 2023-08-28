@@ -26,6 +26,9 @@
     flex-direction: column;
     margin: 40px 0;
 }
+a{
+    text-decoration: none;
+    color: #fff;
 .coin_row{
     display: flex;
     justify-content: space-between;
@@ -50,6 +53,7 @@
         }
     }
     
+}
 }
 .coins_button{
     display: flex;

@@ -9,14 +9,16 @@ import {
   setConvertStatus,
   setConvertValue,
 } from "../../redux/ConvertCrypto/ConvertCryptoSlice";
-import Loader from "../Loader/Loader";
-import { MouseParallax } from "react-just-parallax";
 
 import swapImg from "../../assets/img/swapImg.png";
 import coingBG from "../../assets/img/coin_bg1.png";
 import coinBG2 from "../../assets/img/coin_bg2.png";
 
 import style from "./style/style.module.scss";
+import ConvertFirstLine from "./ConvertFirstLine";
+import ConvertInput from "./ConvertInput";
+import CoinValue from "./CoinValue";
+import ConvertBgImg from "./ConvertBgImg";
 
 const CoinCovert = () => {
   const dispatch = useDispatch();
@@ -87,9 +89,8 @@ const CoinCovert = () => {
   };
 
   const handleSubmit = (event: any) => {
-
-    if (event.key === 'Enter') {
-      console.log('HELLO')
+    if (event.key === "Enter") {
+      console.log("HELLO");
     }
     // or you can send to backend
   };
@@ -98,7 +99,7 @@ const CoinCovert = () => {
     dispatch(addCoin1(firstCoin));
     dispatch(addCoin2(secendCoin));
     setOpenFiat(false);
-    setOpenCrypto(false)
+    setOpenCrypto(false);
   };
 
   const onSwapCoin = () => {
@@ -125,92 +126,31 @@ const CoinCovert = () => {
 
   return (
     <div id="ConvertCrypto" className={style.convert_block}>
-      <div className={style.convert_text}>
-        <h3>Cryptocurrency Converter Calculator</h3>
-      </div>
+      <ConvertFirstLine str="Cryptocurrency Converter Calculator" />
 
-      <div className={style.convert_input}>
-        <div className={style.convert_value}>
-          <input
-            onClick={onOpenCryptoList}
-            type="text"
-            value={firstCoin}
-            onChange={(e) => setFirstCoin(e.target.value.toUpperCase())}
-          />
-          {openCrypto && (
-            <ul className={style.conver_crypto_popUp}>
-              {cryptoList.map((i) => (
-                <li
-                  key={i.name}
-                  className={firstCoin === i.name ? style.selected_li : ""}
-                  onClick={() => onSelectCrypto(i.name)}
-                >
-                  {i.name}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+      <ConvertInput
+        onOpenCryptoList={onOpenCryptoList}
+        firstCoin={firstCoin}
+        setFirstCoin={setFirstCoin}
+        openCrypto={openCrypto}
+        cryptoList={cryptoList}
+        onSelectCrypto={onSelectCrypto}
+        onSwapCoin={onSwapCoin}
+        swapImg={swapImg}
+        onOpenFiatList={onOpenFiatList}
+        secendCoin={secendCoin}
+        setSecendCoin={setSecendCoin}
+        openFiat={openFiat}
+        fiatList={fiatList}
+        onSelectFiat={onSelectFiat}
+        howMuch={howMuch}
+        onChangeHowMuch={onChangeHowMuch}
+        handleSubmit={handleSubmit}
+        onClickConvert={onClickConvert}
+      />
+      <CoinValue statusLoading={statusLoading} valueNum={valueNum} coin1={coin1} coin2={coin2} />
 
-        <div className={style.convert_swap}>
-          <button onClick={onSwapCoin}>
-            <img src={swapImg} alt="swapCoin" />
-          </button>
-        </div>
-
-        <div className={style.convert_value}>
-          <input
-            onClick={onOpenFiatList}
-            type="text"
-            value={secendCoin}
-            onChange={(e) => setSecendCoin(e.target.value.toUpperCase())}
-          />
-          {openFiat && (
-            <ul className={style.conver_crypto_popUp}>
-              {fiatList.map((i) => (
-                <li
-                  key={i.name}
-                  className={secendCoin === i.name ? style.selected_li : ""}
-                  onClick={() => onSelectFiat(i.name)}
-                >
-                  {i.name}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        <div className={style.convert_howMuch}>
-          <input type="number" value={howMuch} onChange={(e) => onChangeHowMuch(e)} />
-        </div>
-        <div     
-         tabIndex={0}
-           onKeyDown={handleSubmit}>
-          <button  
-          className={style.convert_buttonSearch} 
-          onClick={onClickConvert}
-          >
-            Convert
-          </button>
-        </div>
-      </div>
-
-      <div className={style.convert_result}>
-        {statusLoading === "loading" ? (
-          <Loader />
-        ) : (
-          <h1>
-            {valueNum[coin1]} {coin1} = {valueNum[coin2]} {coin2}
-          </h1>
-        )}
-      </div>
-
-      <div className={style.convert_bg_coin1}>
-        <MouseParallax enableOnTouchDevice isAbsolutelyPositioned>
-          <img className={style.convert_first} src={coingBG} alt="bg_coin" />
-          <img className={style.convert_second} src={coinBG2} alt="bg_coin" />
-        </MouseParallax>
-      </div>
+      <ConvertBgImg coingBG={coingBG} coinBG2={coinBG2} />
     </div>
   );
 };

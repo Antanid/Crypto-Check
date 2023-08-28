@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import infoImg from "../../assets/img/infoImg.png";
+import StartImg from "./StartImg";
+import StartText from "./StartText";
 import style from "./style/style.module.scss";
 
 const StartInfo = () => {
@@ -46,16 +48,8 @@ const StartInfo = () => {
 
   return (
     <div id="StartInfo" className={style.info_block}>
-      <div className={style.info_text}>
-        <h1>
-          You can always check <br/>
-          {text}
-          <span>|</span>
-        </h1>
-      </div>
-      <div className={style.info_img}>
-        <img src={infoImg} alt="cryptoImg" />
-      </div>
+      <StartText text={text} />
+      <StartImg infoImg={infoImg} />
     </div>
   );
 };

@@ -1,46 +1,51 @@
 import React, { useState } from "react";
-import logoIcon from '../../assets/img/icon.png';
+import { Link } from "react-router-dom";
+import logoIcon from "../../assets/img/header_icon.png";
 
-import style from './style/style.module.scss'
+import style from "./style/style.module.scss";
 
 const Menu = () => {
   const [menuLi] = useState([
     {
       name: "Main",
-      path: '#StartInfo'
-     
+      path: "#StartInfo",
     },
     {
       name: "Convert Crypto",
-      path: '#ConvertCrypto'
+      path: "#ConvertCrypto",
     },
     {
       name: "Cryptocurrencies",
-      path: '#All_coins'
+      path: "#All_coins",
     },
     {
       name: "Info",
-      path: '#InfoBlock'
+      path: "#InfoBlock",
     },
     {
       name: "Contact",
-      path: '#Contact'
+      path: "#Contact",
     },
   ]);
 
   return (
-      <header className={style.header_block}>
+    <header className={style.header_block}>
+      <Link to={"/"}>
         <div className={style.logo_block}>
-          <img src={logoIcon} alt="logoIcon" />
+          <a href="#StartInfo">
+            <img src={logoIcon} alt="logoIcon" />
+          </a>
         </div>
-        <ul className={style.ul_menu}>
-          {menuLi.map((i) => (
-            <a href={i.path}>
+      </Link>
+
+      <ul className={style.ul_menu}>
+        {menuLi.map((i) => (
+          <a href={i.path}>
             <li>{i.name}</li>
-            </a>
-          ))}
-        </ul>
-      </header>
+          </a>
+        ))}
+      </ul>
+    </header>
   );
 };
 
