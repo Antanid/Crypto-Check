@@ -12,9 +12,15 @@ const FavoritePage = () => {
   const favoriteData = useSelector(setFavoriteData);
   const favoriteStatus = useSelector(setFavoriteStatus);
   useEffect(() => {
-    //@ts-ignore
-    dispatch(fetchFavoriteData());
+    try {
+      //@ts-ignore
+      dispatch(fetchFavoriteData());
+    } catch (error) {
+      console.log(error);
+    }
+
   }, []);
+
   return (
     <div className={style.favotite_mainBlock}>
       <div className={style.coins_heading}>
