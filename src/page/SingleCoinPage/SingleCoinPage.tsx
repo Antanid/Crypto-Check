@@ -1,24 +1,37 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SingleCoin from "../../components/SingleCoin/SingleCoin";
 import style from "../../components/SingleCoin/style/style.module.scss";
 import { setSingleCoin, setSingleStatus } from "../../redux/SingleCoin/SingleCoinSlice";
 import DOMPurify from "dompurify";
 import Loader from "../../components/Loader/Loader";
 import singleArrowImg from "../../assets/img/singleArrow.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import addFavoriteImg from "../../assets/img/addFavorite.png";
 import unFavoriteImg from "../../assets/img/unFavorite.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { fetchSingleCoin } from "../../redux/SingleCoin/asyncSingleCoin";
 
 const SingleCoinPage = () => {
+  const dispatch = useDispatch();
   const singleStatus = useSelector(setSingleStatus);
   const singlData: any = useSelector(setSingleCoin);
   const [img, setImg] = useState(false);
   const [favorite, setFavorite] = useState<any>([]);
   const imgStatus = favorite.filter((i: any) => i.name === singlData["id"]).length;
 
-  console.log(favorite);
+  const urlId = useLocation();
+
+  useEffect(() => {
+    try {
+      const id = urlId.pathname.split("_").reverse()[0];
+      // @ts-ignore: Unreachable code error
+      dispatch(fetchSingleCoin({ id }));
+    } catch (error) {
+      console.log(error);
+    }
+    window.scrollTo(0, 0)
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -32,9 +45,21 @@ const SingleCoinPage = () => {
     fetchData();
   }, [setFavorite]);
 
-  const onAddFavorite = (str: string) => {
+  const onAddFavorite = (
+    str: string,
+    symbol: string,
+    market_cap_rank: number,
+    current_price: number,
+    market_cap: number,
+    image: string
+  ) => {
     const obj = {
       name: str,
+      symbol: symbol,
+      market_cap_rank: market_cap_rank,
+      current_price: current_price,
+      market_cap: market_cap,
+      image: image
     };
     if (imgStatus === 0) {
       try {
@@ -48,7 +73,7 @@ const SingleCoinPage = () => {
   const onRemoveFavorite = (str: string) => {
     const ID = favorite.find((i: any) => i.name === str).id;
     try {
-      axios.delete(`https://64ecb8f8f9b2b70f2bfad7a8.mockapi.io/crypto/${ID}`, );
+      axios.delete(`https://64ecb8f8f9b2b70f2bfad7a8.mockapi.io/crypto/${ID}`);
       setFavorite(favorite.filter((item: any) => item.name !== str));
     } catch (error) {
       console.log(error);
@@ -72,7 +97,19 @@ const SingleCoinPage = () => {
             <div className={style.content_textFav}>
               <h1>{singlData.name}</h1>
               <img
-                onClick={imgStatus > 0 || img === true ? () => onRemoveFavorite(singlData["id"]) : () => onAddFavorite(singlData["id"])}
+                onClick={
+                  imgStatus > 0 || img === true
+                    ? () => onRemoveFavorite(singlData["id"])
+                    : () =>
+                        onAddFavorite(
+                          singlData["id"],
+                          singlData["symbol"],
+                          singlData["market_cap_rank"],
+                          singlData["market_data"].current_price.usd.toLocaleString(),
+                          singlData["market_data"].market_cap.bmd,
+                          singlData["image"].small
+                        )
+                }
                 src={imgStatus > 0 || img === true ? unFavoriteImg : addFavoriteImg}
                 alt="addFavorite"
               />
@@ -85,7 +122,7 @@ const SingleCoinPage = () => {
             <div className={style.info}>
               <div className={style.coin_heading}>
                 <div className={style.coin_imgHeading_block}>
-                {singlData["image"] ? <img src={singlData["image"].small} alt="" /> : null}
+                  {singlData["image"] ? <img src={singlData["image"].small} alt="" /> : null}
                 </div>
                 <p>{singlData["name"]}</p>
                 {singlData["symbol"] ? <p>{singlData["symbol"].toUpperCase()}/USD</p> : null}

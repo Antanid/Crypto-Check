@@ -1,6 +1,6 @@
 .single_mainBlock {
     padding: 100px 0;
-
+min-height: 100vh;
     .coin_container {
         .content {
             max-width: 740px;
@@ -15,6 +15,7 @@
             .coin_heading{
                 .coin_imgHeading_block{
                     animation: updown 2s linear infinite;
+                    margin-right: 10px;
                 }
             }
             .content_button {

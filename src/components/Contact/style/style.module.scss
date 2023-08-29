@@ -49,6 +49,7 @@
 
         .contact_blockImg {
             animation: updown 2s linear infinite;
+
             img {
                 width: 200px;
             }
@@ -96,7 +97,7 @@
 
                 &:active {
                     color: #000;
-                    
+
                     &::after {
                         background: transparent;
                     }
@@ -160,10 +161,33 @@
     0% {
         transform: translateY(-20px);
     }
+
     50% {
         transform: translateY(20px);
     }
+
     100% {
         transform: translateY(-20px);
+    }
+}
+
+@media (max-width: 700px) {
+    .contact_main {
+        text-align: center;
+        .contact_mainInfo {
+            display: inline-block;
+            text-align: center;
+
+            .contact_blockInput {
+                display: inline-block;
+                width: 95%;
+                height: 100%;
+                text-align: center;
+            }
+
+            .contact_blockImg {
+                margin: 80px 0;
+            }
+        }
     }
 }

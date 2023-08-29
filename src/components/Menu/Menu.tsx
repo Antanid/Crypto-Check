@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logoIcon from "../../assets/img/header_icon.png";
+import burgerImg from "../../assets/img/burgerImg.png";
+import closeBurgerImg from "../../assets/img/closeBurgerMenu.png";
 
 import style from "./style/style.module.scss";
 
@@ -26,7 +28,12 @@ const Menu = () => {
       name: "Contact",
       path: "#Contact",
     },
+    {
+      name: "Favorite",
+      path: "favorite-page",
+    },
   ]);
+  const [burgerOpen, setBurgerOpen] = useState(false);
 
   return (
     <header className={style.header_block}>
@@ -40,11 +47,35 @@ const Menu = () => {
 
       <ul className={style.ul_menu}>
         {menuLi.map((i) => (
-          <a href={i.path}>
-            <li>{i.name}</li>
-          </a>
+          <>
+            <a href={i.path}>
+              <li>{i.name !== "Favorite" && i.name}</li>
+            </a>
+            <Link to={"favorite-page"}>
+              <li>{i.name === "Favorite" && i.name}</li>
+            </Link>
+          </>
         ))}
       </ul>
+
+      <div onClick={() => setBurgerOpen((prev) => !prev)} className={style.burger_icon}>
+        <img src={burgerOpen ? closeBurgerImg : burgerImg} alt="burger" />
+      </div>
+
+      <div className={style.burger_menu}>
+        <ul  className={burgerOpen ? style.burger_ul : style.burger_close}>
+          {menuLi.map((i) => (
+            <>
+              <a href={i.path}>
+                <li onClick={() => setBurgerOpen(prev => false)}>{i.name !== "Favorite" && i.name}</li>
+              </a>
+              <Link to={"favorite-page"}>
+                <li onClick={() => setBurgerOpen(prev => false)}>{i.name === "Favorite" && i.name}</li>
+              </Link>
+            </>
+          ))}
+        </ul>
+      </div>
     </header>
   );
 };

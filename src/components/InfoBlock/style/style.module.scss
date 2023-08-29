@@ -1,9 +1,10 @@
 .info_block {
     position: relative;
 
-    .info_mainH2{
+    .info_mainH2 {
         margin-top: 100px;
-        h2{
+
+        h2 {
             font-size: 30px;
             text-align: center;
         }
@@ -16,13 +17,14 @@
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-     
-     
-        .info_text {     
+
+
+        .info_text {
             display: flex;
             flex-direction: column;
             align-items: center;
-            p{
+
+            p {
                 font-size: 20px;
             }
 
@@ -59,7 +61,8 @@
     }
 
     .info_bgImg {
-       z-index: 1;
+        z-index: 1;
+
         img {
             width: 46px;
         }
@@ -83,6 +86,31 @@
             bottom: 30px;
             position: absolute;
             object-fit: contain;
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .info_block {
+        .info_block_main {
+            display: inline-block;
+            text-align: center;
+        }
+
+        .info_text {
+            padding: 5px;
+        }
+    }
+}
+@media (max-width: 300px) {
+    .info_block {
+        .info_text{
+            width: 200px;
+        } 
+        .info_bigImg{
+            img {
+                width: 200px;
+            }
         }
     }
 }

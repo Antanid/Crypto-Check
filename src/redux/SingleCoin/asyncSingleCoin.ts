@@ -2,7 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 type PropsSingleCoin = {
-    id: string
+    id: string;
+    urlId: string;
 };
 
 export const fetchSingleCoin = createAsyncThunk('SingleCoinSlice/fetchSingleCoin', async (params: PropsSingleCoin) => {

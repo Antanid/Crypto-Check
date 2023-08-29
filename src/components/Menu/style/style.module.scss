@@ -37,4 +37,74 @@
         }
 
     }
+    .burger_icon{
+        display: none;
+    }
+    .burger_menu{
+        display: none;
+    }
+}
+@media (max-width: 850px) {
+    .header_block {
+        height: 85px;
+        .ul_menu{
+            display: none;
+        }
+        .burger_icon{
+            z-index: 999999;
+          display: inline-block;
+          position: absolute;
+          right: 40px;
+        }
+        .burger_menu{
+            z-index: 99999;
+            cursor: pointer;
+            display: flex;
+            flex-direction: row-reverse;
+            flex-wrap: wrap;
+            position: fixed;
+            right: 0;
+            margin-right: 10px;
+
+            ul {
+                overflow-y: hidden;
+                position: fixed;
+                top: 50px;
+                transform: translateX(100vh);
+                right: -100vh;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 1.5rem;
+                transition: transform 0.3s;
+                background-color: black;
+            }
+
+            .burger_ul {
+                position: fixed;
+                display: flex;
+                flex-wrap: wrap;
+                transform: translateX(-100vh);
+                transition: transform 0.3s;
+                z-index: 999;
+                justify-content: flex-start;
+                padding-top: 70px;
+                a {
+                    color: #fff;
+                    text-decoration: none;
+                    margin: 2px 3px;
+                    li {
+                        display: table-cell;
+                        position: relative;
+                        list-style: none; 
+                        font-size: 25px;
+                    }
+                   
+                }
+        }
+    }
+}
 }

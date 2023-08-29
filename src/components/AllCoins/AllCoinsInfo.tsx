@@ -64,7 +64,7 @@ type PropsAllCoinsInfo = {
   onPrevPage: () => any;
   onNextPage: () => any;
   AllCoinsStatus: string;
-  onCoinId: (id: string) => void;
+
 };
 
 const AllCoinsInfo: React.FC<PropsAllCoinsInfo> = ({
@@ -73,7 +73,7 @@ const AllCoinsInfo: React.FC<PropsAllCoinsInfo> = ({
   pageNumber,
   onPrevPage,
   onNextPage,
-  onCoinId,
+
 }) => {
   return (
     <div>
@@ -92,17 +92,17 @@ const AllCoinsInfo: React.FC<PropsAllCoinsInfo> = ({
       ) : (
         <>
           {AllCoins.map((i: PropsAllCoins) => (
-            <Link to="single_coin">
-              <div key={i.id} className={style.coin_row} onClick={() => onCoinId(i.id)}>
+            <Link to={`single_coin_${i.id}`}>
+              <div key={i.id} className={style.coin_row}>
                 <p>{i.market_cap_rank}</p>
                 <div className={style.img_symbol}>
                   <img src={i.image} alt="" />
                   <p>{i.symbol.toUpperCase()}</p>
                 </div>
                 <p>${i.current_price.toLocaleString()}</p>
-                <p>{i.price_change_percentage_24h.toFixed(2)}%</p>
+                <p className={style.hide_mobile}>{i.price_change_percentage_24h.toFixed(2)}%</p>
                 <p className={style.hide_mobile}>${i.total_volume.toLocaleString()}</p>
-                <p className={style.hide_mobile}>${i.market_cap.toLocaleString()}</p>
+                <p className={style.hide_mobile_390px}>${i.market_cap.toLocaleString()}</p>
               </div>
             </Link>
           ))}
