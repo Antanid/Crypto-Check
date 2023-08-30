@@ -1,6 +1,7 @@
 .single_mainBlock {
     padding: 100px 0;
-min-height: 100vh;
+    min-height: 100vh;
+
     .coin_container {
         .content {
             max-width: 740px;
@@ -12,12 +13,13 @@ min-height: 100vh;
             box-shadow: 0px 0px 12px #18191b;
             border-radius: 8px;
 
-            .coin_heading{
-                .coin_imgHeading_block{
+            .coin_heading {
+                .coin_imgHeading_block {
                     animation: updown 2s linear infinite;
                     margin-right: 10px;
                 }
             }
+
             .content_button {
                 cursor: pointer;
                 display: flex;
@@ -136,9 +138,11 @@ min-height: 100vh;
     0% {
         transform: translateY(-5px);
     }
+
     50% {
         transform: translateY(5px);
     }
+
     100% {
         transform: translateY(-5px);
     }

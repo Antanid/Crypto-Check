@@ -1,6 +1,7 @@
 .favotite_mainBlock{
-    height: 100vh;
+    min-height: 100vh;
     padding-top: 100px;
+    margin-bottom: 100px;
     .coins_heading{
         display: flex;
         justify-content: space-between;

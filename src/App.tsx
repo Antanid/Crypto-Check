@@ -5,11 +5,12 @@ import Menu from "./components/Menu/Menu";
 import { lazy, Suspense } from "react";
 
 const MainPage = lazy(() => import("./page/MainPage/MainPage"));
-const SingleCoinPage = lazy(() => import("./page/MainPage/MainPage"));
+const SingleCoinPage = lazy(() => import("./page/SingleCoinPage/SingleCoinPage"));
 const FavoritePage = lazy(() => import("./page/FavoritePage/FavoritePage"));
 
 function App() {
   const singlId = useLocation();
+  console.log(singlId)
   return (
     <div className="App">
       <Menu />
@@ -31,7 +32,7 @@ function App() {
           }
         />
         <Route
-          path="favorite-page"
+          path="/favorite-page"
           element={
             <Suspense>
               <FavoritePage />

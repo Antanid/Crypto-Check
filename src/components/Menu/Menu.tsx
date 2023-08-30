@@ -30,7 +30,7 @@ const Menu = () => {
     },
     {
       name: "Favorite",
-      path: "favorite-page",
+      path: "/favorite-page",
     },
   ]);
   const [burgerOpen, setBurgerOpen] = useState(false);
@@ -69,7 +69,7 @@ const Menu = () => {
               <a href={i.path}>
                 <li onClick={() => setBurgerOpen(prev => false)}>{i.name !== "Favorite" && i.name}</li>
               </a>
-              <Link to={"favorite-page"}>
+              <Link to={"/favorite-page"}>
                 <li onClick={() => setBurgerOpen(prev => false)}>{i.name === "Favorite" && i.name}</li>
               </Link>
             </>

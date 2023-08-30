@@ -1,16 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import SingleCoin from "../../components/SingleCoin/SingleCoin";
 import style from "../../components/SingleCoin/style/style.module.scss";
 import { setSingleCoin, setSingleStatus } from "../../redux/SingleCoin/SingleCoinSlice";
-import DOMPurify from "dompurify";
 import Loader from "../../components/Loader/Loader";
 import singleArrowImg from "../../assets/img/singleArrow.png";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import addFavoriteImg from "../../assets/img/addFavorite.png";
 import unFavoriteImg from "../../assets/img/unFavorite.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { fetchSingleCoin } from "../../redux/SingleCoin/asyncSingleCoin";
+import SingleCoinHead from "../../components/SingleCoin/SingleCoinHead";
+import SingleCoinPrice from "../../components/SingleCoin/SingleCoinPrice";
+import SingleTableInfo from "../../components/SingleCoin/SingleTableInfo";
+import SingleCoinMarketCup from "../../components/SingleCoin/SingleCoinMarketCup";
+import SingleCoinInfo from "../../components/SingleCoin/SingleCoinInfo";
 
 const SingleCoinPage = () => {
   const dispatch = useDispatch();
@@ -30,7 +33,7 @@ const SingleCoinPage = () => {
     } catch (error) {
       console.log(error);
     }
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -59,7 +62,7 @@ const SingleCoinPage = () => {
       market_cap_rank: market_cap_rank,
       current_price: current_price,
       market_cap: market_cap,
-      image: image
+      image: image,
     };
     if (imgStatus === 0) {
       try {
@@ -87,177 +90,67 @@ const SingleCoinPage = () => {
         <Loader />
       ) : (
         <div className={style.coin_container}>
-          <div className={style.content}>
-            <Link to="/">
-              <button className={style.content_button}>
-                <img src={singleArrowImg} alt="arrowBack" />
-                Back
-              </button>
-            </Link>
-            <div className={style.content_textFav}>
-              <h1>{singlData.name}</h1>
-              <img
-                onClick={
-                  imgStatus > 0 || img === true
-                    ? () => onRemoveFavorite(singlData["id"])
-                    : () =>
-                        onAddFavorite(
-                          singlData["id"],
-                          singlData["symbol"],
-                          singlData["market_cap_rank"],
-                          singlData["market_data"].current_price.usd.toLocaleString(),
-                          singlData["market_data"].market_cap.bmd,
-                          singlData["image"].small
-                        )
-                }
-                src={imgStatus > 0 || img === true ? unFavoriteImg : addFavoriteImg}
-                alt="addFavorite"
-              />
-            </div>
-          </div>
-          <div className={style.content}>
-            <div className={style.rank}>
-              <span className={style.rank_btn}>Rank # {singlData["market_cap_rank"]}</span>
-            </div>
-            <div className={style.info}>
-              <div className={style.coin_heading}>
-                <div className={style.coin_imgHeading_block}>
-                  {singlData["image"] ? <img src={singlData["image"].small} alt="" /> : null}
-                </div>
-                <p>{singlData["name"]}</p>
-                {singlData["symbol"] ? <p>{singlData["symbol"].toUpperCase()}/USD</p> : null}
-              </div>
-              <div className={style.coin_price}>
-                {singlData["market_data"]?.current_price ? (
-                  <h1>${singlData["market_data"].current_price.usd.toLocaleString()}</h1>
-                ) : null}
-              </div>
-            </div>
-          </div>
+          <SingleCoinHead
+            singleArrowImg={singleArrowImg}
+            imgStatus={imgStatus}
+            img={img}
+            onRemoveFavorite={onRemoveFavorite}
+            name={singlData.name}
+            headId={singlData["id"]}
+            unFavoriteImg={unFavoriteImg}
+            addFavoriteImg={addFavoriteImg}
+            onAddFavorite={onAddFavorite}
+            symbol={singlData["symbol"]}
+            marketCapRank={singlData["market_cap_rank"]}
+            marketDataUsd={singlData["market_data"].current_price.usd.toLocaleString()}
+            marketDataBmd={singlData["market_data"].market_cap.bmd}
+            smallImg={singlData["image"].small}
+          />
 
-          <div className={style.content}>
-            <table>
-              <thead>
-                <tr>
-                  <th>1h</th>
-                  <th>24h</th>
-                  <th>7d</th>
-                  <th>14d</th>
-                  <th>30d</th>
-                  <th>1yr</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    {singlData["market_data"]?.price_change_percentage_1h_in_currency ? (
-                      <p>
-                        {singlData[
-                          "market_data"
-                        ].price_change_percentage_1h_in_currency.usd.toFixed(1)}
-                        %
-                      </p>
-                    ) : null}
-                  </td>
-                  <td>
-                    {singlData["market_data"]?.price_change_percentage_24h_in_currency ? (
-                      <p>
-                        {singlData[
-                          "market_data"
-                        ].price_change_percentage_24h_in_currency.usd.toFixed(1)}
-                        %
-                      </p>
-                    ) : null}
-                  </td>
-                  <td>
-                    {singlData["market_data"]?.price_change_percentage_24h_in_currency ? (
-                      <p>
-                        {singlData[
-                          "market_data"
-                        ].price_change_percentage_7d_in_currency.usd.toFixed(1)}
-                        %
-                      </p>
-                    ) : null}
-                  </td>
-                  <td>
-                    {singlData["market_data"]?.price_change_percentage_24h_in_currency ? (
-                      <p>
-                        {singlData[
-                          "market_data"
-                        ].price_change_percentage_14d_in_currency.usd.toFixed(1)}
-                        %
-                      </p>
-                    ) : null}
-                  </td>
-                  <td>
-                    {singlData["market_data"]?.price_change_percentage_24h_in_currency ? (
-                      <p>
-                        {singlData[
-                          "market_data"
-                        ].price_change_percentage_30d_in_currency.usd.toFixed(1)}
-                        %
-                      </p>
-                    ) : null}
-                  </td>
-                  <td>
-                    {singlData["market_data"]?.price_change_percentage_24h_in_currency ? (
-                      <p>
-                        {singlData[
-                          "market_data"
-                        ].price_change_percentage_1y_in_currency.usd.toFixed(1)}
-                        %
-                      </p>
-                    ) : null}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className={style.content}>
-            <div className={style.stats}>
-              <div className="left">
-                <div className={style.row}>
-                  <h4>24 Hour Low</h4>
-                  {singlData["market_data"]?.low_24h ? (
-                    <p>${singlData["market_data"].low_24h.usd.toLocaleString()}</p>
-                  ) : null}
-                </div>
-                <div className={style.row}>
-                  <h4>24 Hour High</h4>
-                  {singlData["market_data"]?.high_24h ? (
-                    <p>${singlData["market_data"].high_24h.usd.toLocaleString()}</p>
-                  ) : null}{" "}
-                </div>
-              </div>
-              <div className="right">
-                <div className="row">
-                  <h4>Market Cap</h4>
-                  {singlData["market_data"]?.market_cap ? (
-                    <p>${singlData["market_data"].market_cap.usd.toLocaleString()}</p>
-                  ) : null}
-                </div>
-                <div className="row">
-                  <h4>Circulating Supply</h4>
-                  {singlData["market_data"] ? (
-                    <p>{singlData["market_data"].circulating_supply}</p>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          </div>
+          <SingleCoinPrice
+            marketCapRank={singlData["market_cap_rank"]}
+            checkImg={singlData["image"]}
+            smallImg={singlData["image"].small}
+            name={singlData["name"]}
+            symbol={singlData["symbol"]}
+            checkMarketData={singlData["market_data"]}
+            currentPrice={singlData["market_data"].current_price.usd}
+          />
 
-          <div className={style.content}>
-            <div className={style.about}>
-              <h3>About</h3>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(
-                    singlData["description"] ? singlData["description"].en : "Nothing"
-                  ),
-                }}
-              ></p>
-            </div>
-          </div>
+          <SingleTableInfo
+            checkMarketData={singlData["market_data"]}
+            marketDataCurrynce1H={
+              singlData["market_data"].price_change_percentage_1h_in_currency.usd
+            }
+            marketDataCurrynce24h={
+              singlData["market_data"].price_change_percentage_24h_in_currency.usd
+            }
+            marketDataCurrynce7d={
+              singlData["market_data"].price_change_percentage_7d_in_currency.usd
+            }
+            marketDataCurrynce14d={
+              singlData["market_data"].price_change_percentage_14d_in_currency.usd
+            }
+            marketDataCurrynce30d={
+              singlData["market_data"].price_change_percentage_30d_in_currency.usd
+            }
+            marketDataCurrynce1y={
+              singlData["market_data"].price_change_percentage_1y_in_currency.usd
+            }
+          />
+
+          <SingleCoinMarketCup
+            checkMarketData={singlData["market_data"]}
+            marketDataCurrynce24hLow={singlData["market_data"].low_24h.usd}
+            marketDataCurrynce24hHight={singlData["market_data"].high_24h.usd}
+            marketCapUsd={singlData["market_data"].market_cap.usd}
+            marketCapCirculating={singlData["market_data"].circulating_supply}
+          />
+
+          <SingleCoinInfo 
+          descriptionEN={singlData["description"].en}
+          descriptionCheck={singlData["description"]}
+          />
         </div>
       )}
     </div>
