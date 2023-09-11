@@ -7,10 +7,13 @@ import { lazy, Suspense } from "react";
 const MainPage = lazy(() => import("./page/MainPage/MainPage"));
 const SingleCoinPage = lazy(() => import("./page/SingleCoinPage/SingleCoinPage"));
 const FavoritePage = lazy(() => import("./page/FavoritePage/FavoritePage"));
+const LogIn = lazy(() => import("./components/LogIn/LogIn"));
+const SignUp = lazy(() => import("./components/SingUp/SignUp"));
+const ConfirmEmail = lazy(() => import("./components/ConfirmEmail/ConfirmEmail"));
 
 function App() {
   const singlId = useLocation();
-  console.log(singlId)
+  console.log(singlId);
   return (
     <div className="App">
       <Menu />
@@ -36,6 +39,30 @@ function App() {
           element={
             <Suspense>
               <FavoritePage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/log_in"
+          element={
+            <Suspense>
+              <LogIn />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/sign_up"
+          element={
+            <Suspense>
+              <SignUp />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/verification_email"
+          element={
+            <Suspense>
+              <ConfirmEmail />
             </Suspense>
           }
         />

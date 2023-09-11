@@ -10,11 +10,13 @@
 
     .logo_block {
         margin-left: 20px;
+
         img {
             cursor: pointer;
             width: 50px;
         }
-        &:hover{
+
+        &:hover {
             transform: rotate(360deg);
             transition: transform 1s;
         }
@@ -24,6 +26,7 @@
         display: flex;
         width: 100%;
         justify-content: center;
+        align-items: center;
 
         a {
             text-decoration: none;
@@ -37,26 +40,60 @@
         }
 
     }
-    .burger_icon{
+
+    .burger_icon {
         display: none;
     }
-    .burger_menu{
+
+    .burger_menu {
         display: none;
+    }
+
+    .authorization {
+        margin-right: 30px;
+        display: flex;
+        align-items: center;
+        button {
+            cursor: pointer;
+            border: 1px solid white;
+            color: white;
+            background-color: transparent;
+            margin: 0 10px;
+            width: 100px;
+            padding: 10px;
+            border-radius: 10px;
+            height: 40px;
+            &:hover{
+                background-color: #fff;
+                color: #000;
+                transition: 0.3s all ease-in-out;
+            }
+        }
+        h4{
+            margin-right: 10px;
+        }
     }
 }
-@media (max-width: 850px) {
+
+@media (max-width: 1000px) {
     .header_block {
         height: 85px;
-        .ul_menu{
+
+        .ul_menu {
             display: none;
         }
-        .burger_icon{
+
+        .burger_icon {
             z-index: 999999;
-          display: inline-block;
-          position: absolute;
-          right: 40px;
+            display: inline-block;
+            position: absolute;
+            right: 40px;
+            img{
+                width: 40px;
+            }
         }
-        .burger_menu{
+
+        .burger_menu {
             z-index: 99999;
             cursor: pointer;
             display: flex;
@@ -92,19 +129,42 @@
                 z-index: 999;
                 justify-content: flex-start;
                 padding-top: 70px;
+
                 a {
                     color: #fff;
                     text-decoration: none;
                     margin: 2px 3px;
+
                     li {
                         display: table-cell;
                         position: relative;
-                        list-style: none; 
+                        list-style: none;
                         font-size: 25px;
                     }
-                   
+
                 }
+            }
+        }
+         .authorization{
+            margin: 0 auto;
         }
     }
 }
+@media (max-width: 500px){
+    .header_block{
+        .authorization{
+           margin-right: 190px;
+        }
+    }
+}
+@media (max-width: 500px){
+    .header_block{
+        .authorization{
+           display: block;
+           button {
+            height: 30px;
+            margin-top: 5px;
+           }
+        }
+    }
 }

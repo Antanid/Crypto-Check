@@ -16,6 +16,8 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
+       
+      
 
         .contact_blockInput {
             display: flex;
@@ -27,7 +29,7 @@
             width: 400px;
             height: 300px;
             align-items: center;
-
+            position: relative;
             input {
                 height: 25px;
                 border-radius: 10px;
@@ -45,6 +47,7 @@
                 height: 200px;
                 resize: none;
             }
+       
         }
 
         .contact_blockImg {
@@ -55,7 +58,7 @@
             }
         }
 
-        button {
+        .button_contact {
             margin-top: 10px;
             font-size: 15px;
             width: 100px;
@@ -154,7 +157,18 @@
             }
 
         }
+
+        .button_contactSend{
+            border-radius: 6px;
+            padding: 12px;
+            width: 90%;
+            margin-top: 10px;
+            font-size: 15px;
+            background-color: #7ac95c;
+        }
+        
     }
+   
 }
 
 @keyframes updown {
