@@ -37,7 +37,6 @@ const AllCoins = () => {
       <AllCoinsText str="Price of cryptocurrencies" />
       <AllCoinsFirstLine />
       <AllCoinsInfo
-       
         pageNumber={pageNumber}
         AllCoins={AllCoins}
         AllCoinsStatus={AllCoinsStatus}

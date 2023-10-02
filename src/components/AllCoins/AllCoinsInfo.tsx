@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import style from "./style/style.module.scss";
 
-type PropsAllCoins = {
+interface PropsAllCoins {
   id: string;
   symbol: string;
   name: string;
@@ -31,7 +31,7 @@ type PropsAllCoins = {
   last_updated: string;
 };
 
-type PropsAllCoinsInfo = {
+interface PropsAllCoinsInfo {
   AllCoins: {
     id: string;
     symbol: string;
@@ -61,8 +61,8 @@ type PropsAllCoinsInfo = {
     last_updated: string;
   }[];
   pageNumber: number;
-  onPrevPage: () => any;
-  onNextPage: () => any;
+  onPrevPage: () => void;
+  onNextPage: () => void;
   AllCoinsStatus: string;
 
 };
@@ -75,6 +75,7 @@ const AllCoinsInfo: React.FC<PropsAllCoinsInfo> = ({
   onNextPage,
 
 }) => {
+  console.log(onPrevPage, 'PREV!!')
   return (
     <div>
       {AllCoinsStatus === "loading" ? (

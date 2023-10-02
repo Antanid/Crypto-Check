@@ -13,7 +13,6 @@ const ConfirmEmail = lazy(() => import("./components/ConfirmEmail/ConfirmEmail")
 
 function App() {
   const singlId = useLocation();
-  console.log(singlId);
   return (
     <div className="App">
       <Menu />

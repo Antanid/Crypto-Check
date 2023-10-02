@@ -24,6 +24,7 @@ const SingleCoinPage = () => {
   const imgStatus = favorite.filter((i: any) => i.name === singlData["id"]).length;
 
   const urlId = useLocation();
+  console.log(setSingleCoin, 'SINGLE COING')
 
   useEffect(() => {
     try {
@@ -74,10 +75,10 @@ const SingleCoinPage = () => {
     }
   };
   const onRemoveFavorite = (str: string) => {
-    const ID = favorite.find((i: any) => i.name === str).id;
+    const ID = favorite.find(({name}: { name: string }) => name === str).id;
     try {
       axios.delete(`https://64ecb8f8f9b2b70f2bfad7a8.mockapi.io/crypto/${ID}`);
-      setFavorite(favorite.filter((item: any) => item.name !== str));
+      setFavorite(favorite.filter(({name}: { name: string }) => name !== str));
     } catch (error) {
       console.log(error);
     }

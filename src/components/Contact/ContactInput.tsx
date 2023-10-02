@@ -8,7 +8,7 @@ type PropsContactInput = {
   onChangeText: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onChangeEmail: (e: React.FormEvent<HTMLInputElement>) => void;
   onChangeName: (e: any) => void;
-  form: any;
+  form: any; 
   sendEmail: (e: React.FormEvent<HTMLFormElement>) => void;
   isEmailSend: boolean;
 };

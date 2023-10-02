@@ -3,7 +3,7 @@ import style from "./style/style.module.scss";
 type PropConvertInput = {
   onOpenCryptoList: () => void;
   firstCoin: string;
-  setFirstCoin: any;
+  setFirstCoin: (type: string | ((prevState: string) => string)) => void;
   openCrypto: boolean;
   cryptoList: {
     name: string;

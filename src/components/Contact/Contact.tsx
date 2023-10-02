@@ -12,7 +12,7 @@ const Contact = () => {
   const [text, setText] = useState<string>("");
   const [isEmailSend, setIsEmailSend] = useState<boolean>(false);
 
-  const form = useRef<any>();
+  const form = useRef<HTMLFormElement | null>(null);
 
   useEffect(() => {
     let time = setTimeout(() => {
@@ -22,26 +22,26 @@ const Contact = () => {
     return () => clearTimeout(time);
   }, [isEmailSend, setIsEmailSend]);
 
-  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
+  const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const t = await emailjs
-      .sendForm("service_rg8iexm", "template_tsilts6", form.current, "yt_ZtCKUVwnho7XeA")
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
-    await setIsEmailSend(true);
-    await setName("");
-    await setEmail("");
-    await setText("");
-    return t;
+    if (form.current) {
+      const t = await emailjs
+        .sendForm("service_rg8iexm", "template_tsilts6", form.current, "yt_ZtCKUVwnho7XeA")
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+      await setIsEmailSend(true);
+      await setName("");
+      await setEmail("");
+      await setText("");
+      return t;
+    }
   };
-  console.log(form.current);
 
   function onChangeName(e: React.FormEvent<HTMLInputElement>) {
     setName(e.currentTarget.value);
@@ -53,7 +53,6 @@ const Contact = () => {
     setText(e.currentTarget.value);
   }
 
-  console.log(form.current);
   return (
     <div id="Contact" className={style.contact_main}>
       <ContactFirstLine str="Contact with us" />

@@ -4,7 +4,7 @@ import style from "./style/style.module.scss";
 
 const Footer = () => {
   return (
-    <div className={style.footer_block}>
+    <footer className={style.footer_block}>
       <div>
         <h2 >Antanid Developer</h2>
         <p>https://github.com/Antanid</p>
@@ -13,7 +13,7 @@ const Footer = () => {
         </a>
         <p>© 2001-2300, Antanid.com, Inc. or its affiliates</p>
       </div>
-    </div>
+    </footer>
   );
 };
 

@@ -16,10 +16,22 @@ type PropsFavoriteList = {
   }[];
 };
 
+type FavorileMap = {
+  id: string;
+  name: string;
+  symbol: string;
+  market_cap_rank: number;
+  current_price: string;
+  market_cap: number;
+  image: string;
+}
+
 const FavoriteList: React.FC<PropsFavoriteList> = ({ favoriteData }) => {
+  console.log(favoriteData)
   return (
+ 
     <div>
-      {favoriteData.map((i: any) => (
+      {favoriteData.map((i: FavorileMap) => (
         <Link to={`/single_coin_${i.name}`}>
           <div key={i.id} className={style.coin_row}>
             <p>{i.market_cap_rank}</p>

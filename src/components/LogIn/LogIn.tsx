@@ -30,7 +30,6 @@ const LogIn = () => {
       let logIn = await signInUser(email, password);
       startSession(logIn.user);
       navigate("/");
-     
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);

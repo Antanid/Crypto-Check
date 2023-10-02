@@ -26,11 +26,11 @@ const ConvertCryptoSlice = createSlice({
             state.status = Status.LOADING;
             state.value = [];
         })
-        builder.addCase(FetchConvertData.fulfilled, (state, action: any) => {
+        builder.addCase(FetchConvertData.fulfilled, (state, action) => {
             state.status = Status.SUCCESS;
             state.value = action.payload;
         })
-        builder.addCase(FetchConvertData.rejected, (state, action: any) => {
+        builder.addCase(FetchConvertData.rejected, (state) => {
             state.status = Status.ERROR;
 
         })
